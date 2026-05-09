@@ -32,37 +32,32 @@ jobs:
             libncursesw5-dev libtinfo5 \
             cmake libffi-dev libssl-dev \
             ccache
-          sudo apt autoremove -y
 
       - name: 📦 Установить Buildozer
         run: |
-          pip install --user buildozer cython
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          pip install buildozer cython
 
-      - name: 🔨 Инициализировать Buildozer (первый раз)
-        working-directory: ./ankidroid
+      - name: 🔍 Показать версии
         run: |
-          mkdir -p bin
-          # Проверим, что buildozer видит Python
           python3 --version
-          pip3 show buildozer
+          which python3
+          buildozer --version
 
-      - name: 🔨 Собрать APK (первая сборка ~40-60 мин)
+      - name: 🔨 Собрать APK
         working-directory: ./ankidroid
         run: |
-          buildozer android debug 2>&1 || true
-          # Показываем логи если папка .buildozer есть
-          ls -la .buildozer/ 2>/dev/null || echo "No .buildozer dir"
+          python3 -m buildozer android debug 2>&1
 
-      - name: 🔍 Найти APK
+      - name: 📄 Показать лог Buildozera (если есть)
+        if: failure()
         working-directory: ./ankidroid
         run: |
-          find . -name "*.apk" -type f 2>/dev/null || echo "APK not found"
-          ls -la bin/ 2>/dev/null || echo "bin dir not found"
+          cat .buildozer/buildozer.log 2>/dev/null || echo "Лог не найден"
+          find . -name "*.apk" -type f 2>/dev/null || echo "APK не найден"
 
       - name: 📤 Загрузить APK (если собран)
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: ankidroid-apk
           path: ankidroid/bin/*.apk
-        continue-on-error: true
