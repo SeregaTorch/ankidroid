@@ -1,0 +1,22 @@
+[
+  {
+    "id": "deck_python_basics",
+    "title": "Основы Python",
+    "description": "Базовые概念 Python для начинающих",
+    "card_count": 7,
+    "created": "2025-01-01T00:00:00"
+  },
+  {
+    "id": "deck_english_words",
+    "title": "Английские слова",
+    "description": "Популярные английские слова и фразы",
+    "card_count": 6,
+    "created": "2025-01-01T00:00:00"
+  },
+  {
+    "id": "deck_42b2ee43",
+    "title": "ызукь",
+    "description": "",
+    "created": "2025-01-01T00:00:00"
+  }
+]
