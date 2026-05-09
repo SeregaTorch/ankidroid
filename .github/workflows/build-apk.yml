@@ -41,6 +41,7 @@ jobs:
 
       - name: 🔨 Собрать APK
         run: |
+          export JAVA_HOME=/usr/lib/jvm/temurin-17-jdk-amd64
           yes | buildozer android debug 2>&1
 
       - name: 📄 Показать лог Buildozera (если ошибка)
