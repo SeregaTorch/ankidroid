@@ -41,7 +41,7 @@ jobs:
 
       - name: 🔨 Собрать APK
         run: |
-          buildozer android debug 2>&1
+          yes | buildozer android debug 2>&1
 
       - name: 📄 Показать лог Buildozera (если ошибка)
         if: failure()
