@@ -13,10 +13,10 @@ jobs:
       - name: 📥 Скачать код
         uses: actions/checkout@v4
 
-      - name: 🐍 Установить Python 3.12
+      - name: 🐍 Установить Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
       - name: 📦 Установить системные зависимости
         run: |
