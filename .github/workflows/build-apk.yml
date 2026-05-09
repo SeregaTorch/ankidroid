@@ -33,7 +33,7 @@ jobs:
 
       - name: 📦 Установить Buildozer
         run: |
-          pip install buildozer cython setuptools
+          pip install buildozer cython==0.29.37 setuptools
 
       - name: 🔍 Структура файлов
         run: |
