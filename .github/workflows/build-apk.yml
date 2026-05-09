@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: 📥 Скачать код
@@ -37,27 +35,23 @@ jobs:
         run: |
           pip install buildozer cython
 
-      - name: 🔍 Показать версии
+      - name: 🔍 Структура файлов
         run: |
-          python3 --version
-          which python3
-          buildozer --version
+          ls -la
 
       - name: 🔨 Собрать APK
-        working-directory: ./ankidroid
         run: |
-          python3 -m buildozer android debug 2>&1
+          buildozer android debug 2>&1
 
-      - name: 📄 Показать лог Buildozera (если есть)
+      - name: 📄 Показать лог Buildozera (если ошибка)
         if: failure()
-        working-directory: ./ankidroid
         run: |
           cat .buildozer/buildozer.log 2>/dev/null || echo "Лог не найден"
           find . -name "*.apk" -type f 2>/dev/null || echo "APK не найден"
 
-      - name: 📤 Загрузить APK (если собран)
+      - name: 📤 Загрузить APK
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: ankidroid-apk
-          path: ankidroid/bin/*.apk
+          path: bin/*.apk
