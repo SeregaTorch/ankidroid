@@ -1,11 +1,13 @@
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
 from kivy.core.window import Window
+from kivy.utils import platform
 
-# Настройки окна для Windows (будет игнорироваться на Android)
-Window.size = (400, 700)
-Window.minimum_width = 360
-Window.minimum_height = 600
+# Настройки окна только для ПК (на Android вызовут краш)
+if platform != "android":
+    Window.size = (400, 700)
+    Window.minimum_width = 360
+    Window.minimum_height = 600
 
 
 class AnkiDroidApp(MDApp):
