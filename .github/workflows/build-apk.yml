@@ -25,11 +25,11 @@ jobs:
             git zip unzip \
             openjdk-17-jdk \
             python3-pip \
-            autoconf libtool pkg-config \
+            autoconf automake libtool libtool-bin pkg-config \
             zlib1g-dev libncurses5-dev \
             libncursesw5-dev \
             cmake libffi-dev libssl-dev \
-            ccache
+            ccache autoconf-archive
 
       - name: 📦 Установить Buildozer
         run: |
